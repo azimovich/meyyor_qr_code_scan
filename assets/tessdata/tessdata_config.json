@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "name": "eng.traineddata",
+      "url": "https://github.com/tesseract-ocr/tessdata/raw/main/eng.traineddata",
+      "hash": "sha256/6f1b1a0a1e4b5b0e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f"
+    },
+    {
+      "name": "rus.traineddata",
+      "url": "https://github.com/tesseract-ocr/tessdata/raw/main/rus.traineddata",
+      "hash": "sha256/9f1b1a0a1e4b5b0e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f5b5e5f"
+    }
+  ]
+}
