@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meyyor_qr_code_scan/core/enum/enums.dart';
-// import 'package:meyyor_qr_code_scan/presentation/bloc/home_bloc.dart';
 import '../bloc/save_receipt_bloc.dart';
 import 'home_page.dart';
 
@@ -31,7 +30,7 @@ class _SaveReceiptPageState extends State<SaveReceiptPage> {
     "Boshqa"
   ];
 
-  String _selectedCategory = "Boshqa"; // default
+  String _selectedCategory = "Boshqa";
 
   @override
   void initState() {

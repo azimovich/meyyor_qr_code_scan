@@ -54,10 +54,6 @@ class ImagePreviewPage extends StatelessWidget {
                   child: SizedBox(
                     height: 380,
                     width: MediaQuery.of(context).size.width,
-                    // child: Image.file(
-                    //   image,
-                    //   key: ValueKey(image.path),
-                    // ),
                     child: Image.file(File(image)),
                   ),
                 ),

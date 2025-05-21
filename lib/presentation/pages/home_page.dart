@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-// import 'dart:developer';
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -12,8 +10,6 @@ import 'package:meyyor_qr_code_scan/presentation/widgets/bottom_sheet_button.dar
 import 'package:meyyor_qr_code_scan/presentation/widgets/home_receipt_card_widget.dart';
 
 import '../../core/enum/enums.dart';
-// import '../../core/services/service_locator.dart' as sl;
-// import '../../core/services/temp_image_service.dart';
 import '../bloc/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final tempImageService = sl.getIt<TempImageService>();
-
   @override
   void initState() {
     _fetch();
