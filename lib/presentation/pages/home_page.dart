@@ -7,15 +7,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:meyyor_qr_code_scan/presentation/blocs/home_bloc.dart';
 import 'package:meyyor_qr_code_scan/presentation/pages/image_preview_page.dart';
-import 'package:meyyor_qr_code_scan/presentation/widgets/info_row_widget.dart';
+import 'package:meyyor_qr_code_scan/presentation/widgets/bottom_sheet_button.dart';
+import 'package:meyyor_qr_code_scan/presentation/widgets/home_receipt_card_widget.dart';
 
 import '../../core/enum/enums.dart';
-import '../../core/services/service_locator.dart' as sl;
-import '../../core/services/temp_image_service.dart';
+// import '../../core/services/service_locator.dart' as sl;
+// import '../../core/services/temp_image_service.dart';
 import '../bloc/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +24,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final tempImageService = sl.getIt<TempImageService>();
+  // final tempImageService = sl.getIt<TempImageService>();
 
   @override
   void initState() {
@@ -49,36 +47,37 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ListTile(
-              leading: Icon(Icons.camera_alt),
-              title: Text("Kameradan olish"),
-              onTap: () async {
-                Navigator.of(context).pop(); // bottomSheet yopiladi
+            BottomSheetButton(
+              title: "Kameradan tanlash",
+              iconData: Icons.camera_alt,
+              onPressed: () async {
+                Navigator.of(context).pop();
                 final image = await ImagePicker().pickImage(source: ImageSource.camera);
                 if (image != null) {
-                  await tempImageService.saveTempImage(image);
                   Navigator.push(
                     parentContext,
                     MaterialPageRoute(
-                      builder: (_) => ImagePreviewPage(),
+                      builder: (_) => ImagePreviewPage(
+                        image: image.path,
+                      ),
                     ),
                   );
                 }
               },
             ),
-            ListTile(
-              leading: Icon(Icons.photo_library),
-              title: Text("Galereyadan tanlash"),
-              onTap: () async {
-                Navigator.of(context).pop(); // bottomSheet yopiladi
+            BottomSheetButton(
+              title: "Galereyadan tanlash",
+              iconData: Icons.photo_library,
+              onPressed: () async {
+                Navigator.of(context).pop();
                 final image = await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (image != null) {
-                  await tempImageService.saveTempImage(image);
-                  // final tempImage = await tempImageService.getTempImage();
                   Navigator.push(
                     parentContext,
                     MaterialPageRoute(
-                      builder: (_) => ImagePreviewPage(),
+                      builder: (_) => ImagePreviewPage(
+                        image: image.path,
+                      ),
                     ),
                   );
                 }
@@ -156,69 +155,8 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(10),
                 itemBuilder: (context, index) {
                   final receipt = state.receipts[index];
-                  final parsedDateTime = DateTime.tryParse(receipt.dateAndTime) ?? DateTime.now();
 
-                  return Card(
-                    elevation: 0,
-                    color: Colors.grey.shade200,
-                    margin: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InfoRowWidget(
-                            title: '📅 Chek olingan sana',
-                            subtitle: DateFormat('dd.MM.yyyy').format(parsedDateTime),
-                          ),
-                          InfoRowWidget(
-                            title: '⏰ Chek olingan vaqt',
-                            subtitle: DateFormat('HH:mm').format(parsedDateTime),
-                          ),
-                          InfoRowWidget(
-                            title: '💵 Jami hisoblangan',
-                            subtitle: '${receipt.total} uzs',
-                          ),
-                          InfoRowWidget(
-                            title: '💳 & 💰Tolov turi ',
-                            subtitle: receipt.paymentMethod,
-                          ),
-                          InfoRowWidget(
-                            title: '🔖Kategory ',
-                            subtitle: receipt.category,
-                          ),
-                          const SizedBox(height: 8),
-                          const Text(
-                            '🛍 Sotib olingan mahsulotlar:',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          ...receipt.items.map((item) => Padding(
-                                padding: const EdgeInsets.only(bottom: 2),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '• ${item.name}',
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    Text(
-                                      '${item.total.toStringAsFixed(0)} UZS',
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                  );
+                  return HomeReceiptCardWidget(receipt: receipt);
                 },
                 separatorBuilder: (context, index) => SizedBox(height: 4),
                 itemCount: state.receipts.length,

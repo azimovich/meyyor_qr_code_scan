@@ -146,26 +146,29 @@ class _SaveReceiptPageState extends State<SaveReceiptPage> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     color: Colors.grey.shade100,
                     elevation: 0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("🛍 Sotib olingan mahsulotlar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: state.receipt!.items.length,
-                          itemBuilder: (context, index) {
-                            final item = state.receipt!.items[index];
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(item.name),
-                                Text('${item.price.toStringAsFixed(2)} UZS'),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("🛍 Sotib olingan mahsulotlar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.receipt!.items.length,
+                            itemBuilder: (context, index) {
+                              final item = state.receipt!.items[index];
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(item.name),
+                                  Text('${item.price.toStringAsFixed(2)} UZS'),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

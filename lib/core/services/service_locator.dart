@@ -11,7 +11,6 @@ import '../../data/repositories/receipt_repository_impl.dart';
 import '../../domain/repositories/receipt_repository.dart';
 import '../../domain/usecases/get_receipt.dart';
 import 'interceptors/dio_interceptor.dart';
-import 'temp_image_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -33,7 +32,6 @@ void setupLocator() {
   dio.interceptors.add(DioInterceptor());
   getIt.registerSingleton<Dio>(dio);
 
-  getIt.registerLazySingleton<TempImageService>(() => TempImageService());
 
   // Datasource
   getIt.registerLazySingleton<ReceiptRemoteDataSource>(
