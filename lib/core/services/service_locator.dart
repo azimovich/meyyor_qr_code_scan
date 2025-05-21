@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meyyor_qr_code_scan/data/datasource/local/receipt_local_data_source.dart';
 import 'package:meyyor_qr_code_scan/domain/usecases/get_saved_receipts.dart';
@@ -10,28 +10,24 @@ import '../../data/datasource/remote/receipt_remote_data_source.dart';
 import '../../data/repositories/receipt_repository_impl.dart';
 import '../../domain/repositories/receipt_repository.dart';
 import '../../domain/usecases/get_receipt.dart';
-import 'interceptors/dio_interceptor.dart';
+// import 'interceptors/dio_interceptor.dart';
 
 final getIt = GetIt.instance;
 
 void setupLocator() {
-  // Service layer (local DB helper)
-  // getIt.registerLazySingleton<LocalDbHelper>(() => LocalDbHelper());
-
-  final options = BaseOptions(
-    baseUrl: "https://generativelanguage.googleapis.com",
-    connectTimeout: const Duration(seconds: 120),
-    receiveTimeout: const Duration(seconds: 120),
-    contentType: "application/json",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  );
-  final Dio dio = Dio(options);
-  dio.interceptors.add(DioInterceptor());
-  getIt.registerSingleton<Dio>(dio);
-
+  // final options = BaseOptions(
+  //   baseUrl: "https://generativelanguage.googleapis.com",
+  //   connectTimeout: const Duration(seconds: 120),
+  //   receiveTimeout: const Duration(seconds: 120),
+  //   contentType: "application/json",
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  // );
+  // final Dio dio = Dio(options);
+  // dio.interceptors.add(DioInterceptor());
+  // getIt.registerSingleton<Dio>(dio);
 
   // Datasource
   getIt.registerLazySingleton<ReceiptRemoteDataSource>(
@@ -68,6 +64,4 @@ void setupLocator() {
   getIt.registerFactory<SaveReceiptBloc>(
     () => SaveReceiptBloc(getReceiptUseCase: getIt<GetReceiptUseCase>(), saveReceiptUseCase: getIt<SaveReceiptUseCase>()),
   );
-
-
 }
