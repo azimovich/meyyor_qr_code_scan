@@ -17,12 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 Meyyor ocr challenge uchun
 
-Avallbor Assalomu Aleykum. Ismim Shuxratjon. Hozirda ProSfere companyda ishlab kelmoqda.
-Bu chanllange qatnashishimdan maqsad.
-— Yaqin oyimlarni tugulgan kunlari shuning uchun bu menga zarar qilmaydi.
-— Yangi axil jamoa qidiryapman. Ozimdan bilim kattaroq bolgan dasturchilar bilan ishlash.
-— Ishchilarini qadrlaydigan va har tomonla ma'suliyat bilan qaraydigan jamoa va companyga kirish
-— Va bu qiziq narsa 
+Avallbor Assalomu Aleykum. Ismim Shuxratjon.
 
 Challange toxtalsak. Asosi Bloc state managment bilan ddd arch dan foydalandim.
 — DDD degandan toliq ddd formatda qiladim yani har bir page uchun alohida folder ochib. Ilova kichkina bolganim uchun bitta joyga olib chiqib qoydim.
